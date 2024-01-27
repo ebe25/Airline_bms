@@ -1,0 +1,17 @@
+version: '11'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=vedu_phone_lookup
+      - POSTGRES_PASSWORD=vedansh@25
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+volumes:
+  postgres:
