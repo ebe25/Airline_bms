@@ -46,6 +46,14 @@ class CityService {
       throw {error};
     }
   }
+  async getAllCities(){
+    try {
+      const response = cityRepositary.getAllCities();
+      return response;
+    } catch (error) {
+      
+    }
+  }
 }
 
 export default CityService;

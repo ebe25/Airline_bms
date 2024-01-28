@@ -62,10 +62,20 @@ class CityRepositary {
           id: city_id,
         },
       });
-      console.dir(updatedCity)
+      console.dir(updatedCity);
       return updatedCity;
     } catch (error) {
       console.log("Repositary layer error with updateCuity method", error);
+      throw {error};
+    }
+  }
+
+  async getAllCities() {
+    try {
+      const response = await prisma.city.findMany();
+      return response;
+    } catch (error) {
+      console.log("Repositary layer error with getAllCity method", error);
       throw {error};
     }
   }

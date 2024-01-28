@@ -30,7 +30,7 @@ cityController.create = async (req, res) => {
 
 /** DELETE /city/:id */
 
-cityController.destroy = async (req,res) => {
+cityController.destroy = async (req, res) => {
   try {
     const response = await cityService.deleteCity(req.params.id);
     return res.status(200).json({
@@ -66,7 +66,30 @@ cityController.update = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       data: {},
-      message: "Not able to create city, controller layer",
+      message: "Not able to update city, controller layer",
+      success: false,
+      err: error,
+    });
+  }
+};
+
+/***
+ * GET ALL /city
+ */
+cityController.getAll = async (req, res) => {
+  try {
+    const cities = await cityService.getAllCities();
+    return res.status(200).json({
+      data: cities,
+      success: true,
+      message: "All cities successfully retrieved",
+      err: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      data: {},
+      message: "Not able to get-all city, controller layer",
       success: false,
       err: error,
     });
@@ -76,7 +99,7 @@ cityController.update = async (req, res) => {
 /**
  * GET /city/:id
  */
-cityController.get = async (req,res) => {
+cityController.get = async (req, res) => {
   try {
     const city = await cityService.getCity(req.params.id);
     return res.status(200).json({
