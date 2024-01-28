@@ -48,15 +48,13 @@ class CityRepositary {
     }
   }
 
-  async updateCity({city_id}, {name}) {
+  async updateCity({city_id}, data) {
     try {
       const city = await prisma.city.update({
         where: {
           id: city_id,
         },
-        data: {
-          name: name,
-        },
+        data: data,
       });
       console.log("city updated!");
       const updatedCity = await prisma.city.findUnique({
