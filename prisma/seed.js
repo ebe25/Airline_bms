@@ -1,27 +1,61 @@
 import {PrismaClient} from "@prisma/client";
-import {randEmail, randFirstName} from "@ngneat/falso";
+import {
+  randAddress,
+  randAirport,
+  randAirportCode,
+  randAirportName,
+  randCity,
+  randEmail,
+  randFirstName,
+  randFullAddress,
+} from "@ngneat/falso";
 const prisma = new PrismaClient();
 
 async function main() {
-  const mockData = Array.from({length: 10}).map(() => ({
-    email: randEmail(),
-    name: randFirstName(),
+  const mockCities = Array.from({length: 5}).map(() => ({
+    name: randCity(),
   }));
 
-  
-  console.log("Seeding users");
+  const mockAirports = Array.from({length: 5}).map(() => ({
+    name: randAirportName(),
+    address: randAddress(),
+    cityId: randAirportCode(),
+  }));
 
-  for (const user of mockData) {
-    await prisma.user.create({
-      data: {
-        email: user.email,
-        name: user.name,
-      }
-    });
-  }
+  console.log("Seeding");
+  // for (const city of mockCities) {
+  //   await prisma.city.create({
+  //     data: {
+  //       name: city.name,
+  //     },
+  //   });
+  // }
 
-  console.log("Seeding completed");
+  // await prisma.airport.create({
+  //   data: {
+  //     name: randAirportName(),
+  //     address: randFullAddress(),
+  //     cityId: 1,
+  //   },
+  // });
+//   await prisma.airport.create({
+//     data: {
+//       name: randAirportName(),
+//       address: randFullAddress(),
+//       cityId: 2,
+//     },
+//   });
+//   await prisma.airport.create({
+//     data: {
+//       name: randAirportName(),
+//       address: randFullAddress(),
+//       cityId: 3,
+//     },
+//   });
+// }
 }
+
+console.log("Seeding completed");
 
 main()
   .then(async () => {
