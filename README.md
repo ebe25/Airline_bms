@@ -42,3 +42,11 @@
     -A Flight => Airplane, Airplane can have multiple Flights
     - An Airport can have multiple flights but a flight can only have one airport
     - A City can have multiple airports but an airport can only have one city
+
+## Tables
+
+### Cities -> id,name, createdAt, updatedAt
+
+### Airports -> id, name, address, city_id(fk) , createdAt, updatedAt
+
+        ```Relationship-> 1-n between city and airports```
