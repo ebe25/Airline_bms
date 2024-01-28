@@ -2,6 +2,7 @@
  * Service talks to corresponding repositary, that does some manipulations
  * with the data from the repo
  * and returns the data to the controller layer.
+ * All the bussinees realted logic for the db is manipualted here only
  */
 import RepositaryCollection from "../repositary/index.js";
 
@@ -46,13 +47,12 @@ class CityService {
       throw {error};
     }
   }
-  async getAllCities(){
+  async getAllCities(filter) {
+   
     try {
-      const response = cityRepositary.getAllCities();
-      return response;
-    } catch (error) {
-      
-    }
+      const cities = cityRepositary.getAllCities({name: filter.name});
+      return cities;
+    } catch (error) {}
   }
 }
 

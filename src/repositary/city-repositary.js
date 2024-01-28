@@ -70,10 +70,21 @@ class CityRepositary {
     }
   }
 
-  async getAllCities() {
+  async getAllCities(filter) {
     try {
-      const response = await prisma.city.findMany();
-      return response;
+      if(filter.name){
+        const paginatedCities = await prisma.city.findMany({
+          where:{
+            name: {
+              startsWith: filter.name,
+              mode: "insensitive"
+            }
+          }
+        })
+        return paginatedCities;
+      }
+      const cities = await prisma.city.findMany();
+      return cities;
     } catch (error) {
       console.log("Repositary layer error with getAllCity method", error);
       throw {error};
