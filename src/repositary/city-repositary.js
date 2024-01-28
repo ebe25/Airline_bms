@@ -18,7 +18,7 @@ class CityRepositary {
     }
   }
 
-  async deleteCity({city_id}) {
+  async deleteCity(city_id) {
     try {
       const city = await prisma.city.delete({
         where: {
@@ -33,7 +33,7 @@ class CityRepositary {
     }
   }
 
-  async getCity({city_id}) {
+  async getCity(city_id) {
     try {
       const city = await prisma.city.findUnique({
         where: {
@@ -48,7 +48,7 @@ class CityRepositary {
     }
   }
 
-  async updateCity({city_id}, data) {
+  async updateCity(city_id, data) {
     try {
       const city = await prisma.city.update({
         where: {
