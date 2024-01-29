@@ -33,9 +33,12 @@ class CityRepositary {
     }
   }
 
-  async createMultipleCities(cities) {
+  async createMultipleCities(data) {
     try {
-      const postedCities = await prisma.city.createMany(cities);
+      const postedCities = await prisma.city.createMany({
+        data: data,
+        skipDuplicates: true,
+      });
       return postedCities;
     } catch (error) {
       console.log("something wrong in the repositary layer", error);

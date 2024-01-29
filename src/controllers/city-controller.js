@@ -5,11 +5,31 @@ const cityController = {};
 
 /**
  * POST : /cities
- * req-body {name: "Delhi"}
+ * req-body {name: "Delhi"} or req-body  [{name: "delhi"}, {name:"agra"}]
  */
 cityController.create = async (req, res) => {
-  console.log(req.body);
+  console.log(req.body.cities)
   try {
+    if (req.body) {
+      try {
+        const mutlipleCities = await cityService.createMultipleCities(
+          req.body.cities
+        );
+        return res.status(201).json({
+          data: mutlipleCities,
+          message: "multiple cities created",
+          success: true,
+          err: {},
+        });
+      } catch (error) {
+        return res.status(500).json({
+          data: {},
+          message: "Not able to create city(multiple), controller layer",
+          success: false,
+          err: error,
+        });
+      }
+    }
     const city = await cityService.createCity(req.body);
     return res.status(201).json({
       data: city,
@@ -27,13 +47,6 @@ cityController.create = async (req, res) => {
     });
   }
 };
-
-/**
- *
- * POST
- * @param {*} res
- * @returns
- */
 
 /** DELETE /city/:id */
 
