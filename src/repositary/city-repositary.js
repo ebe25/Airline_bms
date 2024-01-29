@@ -33,6 +33,16 @@ class CityRepositary {
     }
   }
 
+  async createMultipleCities(cities) {
+    try {
+      const postedCities = await prisma.city.createMany(cities);
+      return postedCities;
+    } catch (error) {
+      console.log("something wrong in the repositary layer", error);
+      throw {error};
+    }
+  }
+
   async getCity(city_id) {
     try {
       const city = await prisma.city.findUnique({
@@ -70,21 +80,21 @@ class CityRepositary {
     }
   }
 
-  async getAllCities(filter) {
+  async getAllCities({name}) {
     try {
-      if(filter.name){
+      if (name) {
         const paginatedCities = await prisma.city.findMany({
-          where:{
+          where: {
             name: {
-              startsWith: filter.name,
-              mode: "insensitive"
-            }
-          }
-        })
+              startsWith: name,
+              mode: "insensitive",
+            },
+          },
+        });
         return paginatedCities;
       }
-      const cities = await prisma.city.findMany();
-      return cities;
+      const allCities = await prisma.city.findMany();
+      return allCities;
     } catch (error) {
       console.log("Repositary layer error with getAllCity method", error);
       throw {error};

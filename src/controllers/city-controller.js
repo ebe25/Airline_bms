@@ -28,6 +28,13 @@ cityController.create = async (req, res) => {
   }
 };
 
+/**
+ *
+ * POST
+ * @param {*} res
+ * @returns
+ */
+
 /** DELETE /city/:id */
 
 cityController.destroy = async (req, res) => {
@@ -79,6 +86,14 @@ cityController.update = async (req, res) => {
 cityController.getAll = async (req, res) => {
   try {
     const cities = await cityService.getAllCities(req.query);
+    if (cities.length === 0) {
+      return res.status(404).json({
+        data: cities,
+        message: "No city with given name found",
+        success: false,
+        err: {},
+      });
+    }
     return res.status(200).json({
       data: cities,
       success: true,

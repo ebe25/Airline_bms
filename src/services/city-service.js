@@ -10,7 +10,17 @@ const cityRepositary = new RepositaryCollection.CityRepositary();
 class CityService {
   async createCity(data) {
     try {
-      const response = cityRepositary.createCity(data);
+      const response = await cityRepositary.createCity(data);
+      return response;
+    } catch (error) {
+      console.log("Error with service layer");
+      throw {error};
+    }
+  }
+
+  async createMultipleCities(data) {
+    try {
+      const response = await cityRepositary.createMultipleCities(data);
       return response;
     } catch (error) {
       console.log("Error with service layer");
@@ -20,7 +30,7 @@ class CityService {
 
   async deleteCity(city_id) {
     try {
-      const response = cityRepositary.deleteCity(city_id);
+      const response = await cityRepositary.deleteCity(city_id);
       return response;
     } catch (error) {
       console.log("Error with service layer");
@@ -30,7 +40,7 @@ class CityService {
 
   async updateCity(city_id, data) {
     try {
-      const response = cityRepositary.updateCity(city_id, data);
+      const response = await cityRepositary.updateCity(city_id, data);
       return response;
     } catch (error) {
       console.log("Error with service layer");
@@ -40,7 +50,7 @@ class CityService {
 
   async getCity(city_id) {
     try {
-      const response = cityRepositary.getCity(city_id);
+      const response = await cityRepositary.getCity(Number(city_id));
       return response;
     } catch (error) {
       console.log("Error with service layer");
@@ -48,11 +58,13 @@ class CityService {
     }
   }
   async getAllCities(filter) {
-   
     try {
-      const cities = cityRepositary.getAllCities({name: filter.name});
+      const cities = await cityRepositary.getAllCities({name: filter.name});
       return cities;
-    } catch (error) {}
+    } catch (error) {
+      console.log("Error with service layer");
+      throw {error};
+    }
   }
 }
 
