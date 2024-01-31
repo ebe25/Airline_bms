@@ -12,9 +12,9 @@ import {
 const prisma = new PrismaClient();
 
 async function main() {
-  const mockCities = Array.from({length: 5}).map(() => ({
-    name: randCity(),
-  }));
+  // const mockCities = Array.from({length: 5}).map(() => ({
+  //   name: randCity(),
+  // }));
 
   const mockAirports = Array.from({length: 5}).map(() => ({
     name: randAirportName(),
@@ -38,21 +38,28 @@ async function main() {
   //     cityId: 1,
   //   },
   // });
-//   await prisma.airport.create({
-//     data: {
-//       name: randAirportName(),
-//       address: randFullAddress(),
-//       cityId: 2,
-//     },
-//   });
-//   await prisma.airport.create({
-//     data: {
-//       name: randAirportName(),
-//       address: randFullAddress(),
-//       cityId: 3,
-//     },
-//   });
-// }
+  //   await prisma.airport.create({
+  //     data: {
+  //       name: randAirportName(),
+  //       address: randFullAddress(),
+  //       cityId: 2,
+  //     },
+  //   });
+  //   await prisma.airport.create({
+  //     data: {
+  //       name: randAirportName(),
+  //       address: randFullAddress(),
+  //       cityId: 3,
+  //     },
+  //   });
+  // }
+
+  await prisma.airport.create({
+    data: {
+      name: randAirportName(),
+      cityId: 10,
+    },
+  });
 }
 
 console.log("Seeding completed");

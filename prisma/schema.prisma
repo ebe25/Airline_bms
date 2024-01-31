@@ -8,19 +8,25 @@ datasource db {
 }
 
 model City {
+  id        Int       @id @default(autoincrement())
   name      String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  id        Int       @id @default(autoincrement())
   airports  Airport[]
 }
 
 model Airport {
+  id           Int      @id @default(autoincrement())
   name         String   @unique
-  address      String?  @unique
+  address      String? 
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  id           Int      @id @default(autoincrement())
   cityId       Int
   airport_city City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
+}
+
+model Airplanes {
+  id           Int    @id @default(autoincrement())
+  model_number String @unique
+  capacity     Int?   @default(500)
 }

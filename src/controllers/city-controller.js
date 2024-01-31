@@ -8,7 +8,6 @@ const cityController = {};
  * req-body {name: "Delhi"} or req-body  [{name: "delhi"}, {name:"agra"}]
  */
 cityController.create = async (req, res) => {
-  console.log(req.body.cities)
   try {
     if (req.body) {
       try {
@@ -49,7 +48,6 @@ cityController.create = async (req, res) => {
 };
 
 /** DELETE /city/:id */
-
 cityController.destroy = async (req, res) => {
   try {
     const response = await cityService.deleteCity(req.params.id);
@@ -71,7 +69,7 @@ cityController.destroy = async (req, res) => {
 };
 
 /** PATCH /city/:id
- *  req-body {name: "city", id: "CUID"}
+ *  req-body {name: "city", id: "Id(Int)"}
  */
 cityController.update = async (req, res) => {
   try {
