@@ -7,10 +7,12 @@ const airportService = new ServicesLayersCollection.AirportService();
  * req.body => {}
  */
 
-async function create(req, res) {
-  if(req.body.airports){
+async function createAirport(req, res) {
+  if (req.body.airports) {
     try {
-      const airport = await airportService.createMultipleAirports(req.body.airports);
+      const airport = await airportService.createMultipleAirports(
+        req.body.airports
+      );
       return res.status(201).json({
         data: airport,
         success: true,
@@ -26,7 +28,7 @@ async function create(req, res) {
       });
     }
   }
-  
+
   try {
     const airport = await airportService.createAirport(req.body);
     return res.status(201).json({
@@ -45,7 +47,7 @@ async function create(req, res) {
   }
 }
 
-async function destory(req, res) {
+async function destoryAirport(req, res) {
   try {
     const response = await airportService.deleteAirport(req.params.id);
     return res.status(200).json({
@@ -65,7 +67,7 @@ async function destory(req, res) {
   }
 }
 
-async function update(req, res) {
+async function updateAirport(req, res) {
   try {
     const updatedAirport = await airportService.updateAirport(
       req.params.id,
@@ -87,7 +89,7 @@ async function update(req, res) {
     });
   }
 }
-async function getAll(req, res) {
+async function getAllAirports(req, res) {
   try {
     const response = await airportService.getAllAirports(req.query);
     return res.json({
@@ -107,7 +109,7 @@ async function getAll(req, res) {
   }
 }
 
-async function get(req, res) {
+async function getAirport(req, res) {
   try {
     const airport = await airportService.getAirport(req.params.id);
     return res.json({
@@ -126,4 +128,10 @@ async function get(req, res) {
   }
 }
 
-export {create, destory, update, getAll, get};
+export {
+  createAirport,
+  destoryAirport,
+  updateAirport,
+  getAllAirports,
+  getAirport,
+};

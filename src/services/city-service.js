@@ -66,6 +66,16 @@ class CityService {
       throw {error};
     }
   }
+
+  async getAllAirports(id) {
+    try {
+      const response = await cityRepositary.getAllAirports(Number(id));
+      return response;
+    } catch (error) {
+      console.log("Error with service layer");
+      throw {error};
+    }
+  }
 }
 
 export default CityService;

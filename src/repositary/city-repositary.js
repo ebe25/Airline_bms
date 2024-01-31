@@ -103,6 +103,20 @@ class CityRepositary {
       throw {error};
     }
   }
+
+  async getAllAirports(city_id) {
+    try {
+      const response = await prisma.airport.findMany({
+        where: {
+          cityId: city_id,
+        },
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+      throw {error};
+    }
+  }
 }
 
 export default CityRepositary;

@@ -1,13 +1,12 @@
 import ServicesCollection from "../services/index.js";
 
 const cityService = new ServicesCollection.CityService();
-const cityController = {};
 
 /**
  * POST : /cities
  * req-body {name: "Delhi"} or req-body  [{name: "delhi"}, {name:"agra"}]
  */
-cityController.create = async (req, res) => {
+async function createCity(req, res) {
   try {
     if (req.body) {
       try {
@@ -45,10 +44,10 @@ cityController.create = async (req, res) => {
       err: error,
     });
   }
-};
+}
 
 /** DELETE /city/:id */
-cityController.destroy = async (req, res) => {
+async function destroyCity(req, res) {
   try {
     const response = await cityService.deleteCity(req.params.id);
     return res.status(200).json({
@@ -66,12 +65,12 @@ cityController.destroy = async (req, res) => {
       err: error,
     });
   }
-};
+}
 
 /** PATCH /city/:id
  *  req-body {name: "city", id: "Id(Int)"}
  */
-cityController.update = async (req, res) => {
+async function updateCity(req, res) {
   try {
     const city = await cityService.updateCity(req.params.id, req.body);
     return res.status(200).json({
@@ -89,12 +88,12 @@ cityController.update = async (req, res) => {
       err: error,
     });
   }
-};
+}
 
 /***
  * GET ALL /city
  */
-cityController.getAll = async (req, res) => {
+async function getAllCity(req, res) {
   try {
     const cities = await cityService.getAllCities(req.query);
     if (cities.length === 0) {
@@ -120,12 +119,12 @@ cityController.getAll = async (req, res) => {
       err: error,
     });
   }
-};
+}
 
 /**
  * GET /city/:id
  */
-cityController.get = async (req, res) => {
+async function getCity(req, res) {
   try {
     const city = await cityService.getCity(req.params.id);
     return res.status(200).json({
@@ -143,6 +142,34 @@ cityController.get = async (req, res) => {
       err: error,
     });
   }
-};
+}
 
-export default cityController;
+/** GET /city/:id => gets all the airports for that city*/
+async function getAllAirportsForCity(req, res) {
+  try {
+    const cityAirports = await cityService.getAllAirports(req.params.id);
+    return res.status(200).json({
+      data: cityAirports,
+      success: true,
+      message: "Succesfully fetched List of airports for the id specific city",
+      err: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      data: {},
+      message: "Not able to retrieve city's airports, controller layer",
+      success: false,
+      err: error,
+    });
+  }
+}
+
+export {
+  createCity,
+  destroyCity,
+  getCity,
+  getAllCity,
+  updateCity,
+  getAllAirportsForCity,
+};
