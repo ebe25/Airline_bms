@@ -1,5 +1,5 @@
 import RepositaryCollection from "../repositary/index.js";
-
+import {compareTime} from "../utils/helper.js";
 class FlightService {
   constructor() {
     this.flightRepositary = new RepositaryCollection.FlightRepositary();
@@ -7,7 +7,7 @@ class FlightService {
   }
 
   /**
-   * {
+   * req.body=> {
    *    flight_number: "BA 222"
    *    price: 2500
    *    arrival_time "10/09/2024"
@@ -18,9 +18,14 @@ class FlightService {
    *    total_seats => find from airplane
    * }
    *
+   *        -- add a check as the time (arrival)> (departure)
    */
+
   async createFlight(data) {
     try {
+      if (!compareTime(data.arrival_time, data.departure_time)) {
+        throw {error: "Arrival time cannot be less then departure time!"};
+      }
       const airplane = await this.airplaneRepositary.getAirplane(
         Number(data.airplane_id)
       );
@@ -41,7 +46,7 @@ class FlightService {
 
   async getFlight(id) {
     try {
-      const flight = await this.flightRepositary.getFlight(id);
+      const flight = await this.flightRepositary.getFlight(Number(id));
       return flight;
     } catch (error) {
       console.log("Something wrong with service layer");
