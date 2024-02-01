@@ -43,7 +43,7 @@ model Flight {
   departure_time      DateTime
   departure_airportId Int
   airplane            Airplane? @relation(fields: [airplane_id], references: [id])
-  airplane_id         Int      @unique
+  airplane_id         Int     
   total_seats         Int?
   boarding_gate       String?
 }
