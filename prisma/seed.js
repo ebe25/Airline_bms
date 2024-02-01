@@ -4,7 +4,9 @@ import {
   randAirportCode,
   randAirportName,
   randFlightNumber,
+  randFutureDate,
   randNumber,
+  randSoonDate,
 } from "@ngneat/falso";
 const prisma = new PrismaClient();
 
@@ -61,13 +63,24 @@ async function main() {
   //     cityId: 10,
   //   },
   // });
-  await prisma.airplanes.createMany({
+  await prisma.airplane.createMany({
     data: [
       {model_number: "Airbus A320", capacity: 1200},
       {model_number: "Boeing 747", capacity: 1500},
       {model_number: "Airbus A330"},
     ],
     skipDuplicates: true,
+  });
+  await prisma.flight.create({
+    data: {
+      flight_number: "BA 222",
+      price: 29000,
+      arrival_time: randFutureDate(),
+      departure_time: randSoonDate(),
+      departure_airportId: 10,
+      arrival_airportId: 10,
+      airplane_id: 2,
+    },
   });
 }
 

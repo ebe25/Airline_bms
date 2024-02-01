@@ -14,6 +14,9 @@ import {
   getAllAirports,
   getAirport,
 } from "../../controllers/airport-controller.js";
+
+import * as flightController from "../../controllers/flight-controller.js";
+
 const ApiV1Router = express.Router();
 
 /**city */
@@ -31,4 +34,7 @@ ApiV1Router.get("/airport", getAllAirports);
 ApiV1Router.patch("/airport/:id", updateAirport);
 ApiV1Router.delete("/airport/:id", destoryAirport);
 
+/**flight */
+ApiV1Router.post("/flights", flightController.createFlight);
+ApiV1Router.get("/flights/:id", flightController.getFlight);
 export default ApiV1Router;
