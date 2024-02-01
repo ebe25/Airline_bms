@@ -18,15 +18,32 @@ model City {
 model Airport {
   id           Int      @id @default(autoincrement())
   name         String   @unique
-  address      String? 
+  address      String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   cityId       Int
   airport_city City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
 }
 
-model Airplanes {
-  id           Int    @id @default(autoincrement())
-  model_number String @unique
-  capacity     Int?   @default(500)
+model Airplane {
+  id           Int      @id @default(autoincrement())
+  model_number String   @unique
+  capacity     Int?     @default(500)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  flights      Flight[]
+}
+
+model Flight {
+  id                  Int      @id @default(autoincrement())
+  flight_number       String   @unique
+  price               Int
+  arrival_time        DateTime
+  arrival_airportId   Int
+  departure_time      DateTime
+  departure_airportId Int
+  airplane            Airplane @relation(fields: [airplane_id], references: [id])
+  airplane_id         Int      @unique
+  total_seats         Int?
+  boarding_gate       String?
 }

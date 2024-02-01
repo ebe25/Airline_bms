@@ -1,13 +1,10 @@
 import {PrismaClient} from "@prisma/client";
 import {
   randAddress,
-  randAirport,
   randAirportCode,
   randAirportName,
-  randCity,
-  randEmail,
-  randFirstName,
-  randFullAddress,
+  randFlightNumber,
+  randNumber,
 } from "@ngneat/falso";
 const prisma = new PrismaClient();
 
@@ -20,6 +17,10 @@ async function main() {
     name: randAirportName(),
     address: randAddress(),
     cityId: randAirportCode(),
+  }));
+
+  const mockAirplanes = Array.from({length: 5}).map(() => ({
+    model_number: randNumber.toString(),
   }));
 
   console.log("Seeding");
@@ -54,11 +55,19 @@ async function main() {
   //   });
   // }
 
-  await prisma.airport.create({
-    data: {
-      name: randAirportName(),
-      cityId: 10,
-    },
+  // await prisma.airport.create({
+  //   data: {
+  //     name: randAirportName(),
+  //     cityId: 10,
+  //   },
+  // });
+  await prisma.airplanes.createMany({
+    data: [
+      {model_number: "Airbus A320", capacity: 1200},
+      {model_number: "Boeing 747", capacity: 1500},
+      {model_number: "Airbus A330"},
+    ],
+    skipDuplicates: true,
   });
 }
 
