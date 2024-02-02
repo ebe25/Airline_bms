@@ -53,5 +53,15 @@ class FlightService {
       throw {error};
     }
   }
+
+  async getAllFlights(data) {
+    try {
+      const flights = this.flightRepositary.getAllFlightsData(data);
+      return flights;
+    } catch (error) {
+      console.log("something is wrong with serive layer");
+      throw {error};
+    }
+  }
 }
 export default FlightService;

@@ -37,4 +37,5 @@ ApiV1Router.delete("/airport/:id", destoryAirport);
 /**flight */
 ApiV1Router.post("/flights", flightController.createFlight);
 ApiV1Router.get("/flights/:id", flightController.getFlight);
+ApiV1Router.get("/flights", flightController.getAllFlights);
 export default ApiV1Router;
