@@ -5,10 +5,13 @@
 import CityService from "./city-service.js";
 import AirportService from "./airport-service.js";
 import FlightService from "./flight-service.js";
-const ServicesLayersCollection = {
+import CrudService from "./crud-service.js";
+
+export const BasicServicesCollection = {
+  CrudService,
+};
+export const ServicesLayersCollection = {
   CityService,
   AirportService,
   FlightService,
 };
-
-export default ServicesLayersCollection;

@@ -28,7 +28,7 @@ class AirportRepositary {
         },
       });
       console.log("Airport deleted!");
-      return true;
+      return Airport;
     } catch (error) {
       console.log("repositary delete method error", error);
       throw {error};

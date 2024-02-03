@@ -1,19 +1,18 @@
+//calling the crud repo parent class and invoking its constructor with the airplane model!
 import {PrismaClient} from "@prisma/client";
-const prisma = new PrismaClient();
+import RepositaryCollection from "./index.js";
 
-class AirplaneRepositary {
-  async getAirplane(id) {
-    try {
-      const airplane = await prisma.airplane.findUnique({
-        where: {
-          id: id,
-        },
-      });
-      return airplane;
-    } catch (error) {
-      console.log(error);
-      throw {error};
-    }
+const prisma = new PrismaClient();
+const {CrudRepositary} = RepositaryCollection;
+class AirplaneRepositary extends CrudRepositary {
+  constructor() {
+    super(prisma.airplane);
   }
 }
+
 export default AirplaneRepositary;
+// import madge from "madge";
+
+// madge("src/repositary/airplane-respositary.js").then((res) => {
+//   console.log(res.obj('repositary/index.js'));
+// });

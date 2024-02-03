@@ -1,9 +1,10 @@
+import AirplaneRepositary from "../repositary/airplane-respositary.js";
 import RepositaryCollection from "../repositary/index.js";
 import {compareTime} from "../utils/helper.js";
 class FlightService {
   constructor() {
     this.flightRepositary = new RepositaryCollection.FlightRepositary();
-    this.airplaneRepositary = new RepositaryCollection.AirplaneRepositary();
+    this.airplaneRepositary = new AirplaneRepositary();
   }
 
   /**
