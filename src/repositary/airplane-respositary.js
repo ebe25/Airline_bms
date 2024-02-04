@@ -1,9 +1,9 @@
 //calling the crud repo parent class and invoking its constructor with the airplane model!
 import {PrismaClient} from "@prisma/client";
 import RepositaryCollection from "./index.js";
-
+import CrudRepositary from "./crud-repositary.js";
 const prisma = new PrismaClient();
-const {CrudRepositary} = RepositaryCollection;
+// const {CrudRepositary} = RepositaryCollection;
 class AirplaneRepositary extends CrudRepositary {
   constructor() {
     super(prisma.airplane);
